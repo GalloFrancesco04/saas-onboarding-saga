@@ -36,7 +36,7 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://host.docker.internal:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
@@ -124,7 +124,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__OrchestratorDb: "Server=mssql-server,1433;Database=SaaS_Orchestrator;User Id=sa;Password=p4ssw0rD;TrustServerCertificate=true;MultipleActiveResultSets=true"
-      Kafka__BootstrapServers: "kafka:9092"
+      Kafka__BootstrapServers: "kafka:29092"
       Services__Billing__BaseAddress: "http://saas-billing:8080"
       Services__Provisioning__BaseAddress: "http://saas-provisioning:8080"
 
@@ -145,7 +145,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__BillingDb: "Server=mssql-server,1433;Database=SaaS_Billing;User Id=sa;Password=p4ssw0rD;TrustServerCertificate=true;MultipleActiveResultSets=true"
-      Kafka__BootstrapServers: "kafka:9092"
+      Kafka__BootstrapServers: "kafka:29092"
 
   saas-provisioning:
     image: ghcr.io/gallofrancesco04/saas-provisioning:latest
@@ -164,7 +164,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__ProvisioningDb: "Server=mssql-server,1433;Database=SaaS_Provisioning;User Id=sa;Password=p4ssw0rD;TrustServerCertificate=true;MultipleActiveResultSets=true"
-      Kafka__BootstrapServers: "kafka:9092"
+      Kafka__BootstrapServers: "kafka:29092"
 
   saas-notification:
     image: ghcr.io/gallofrancesco04/saas-notification:latest
@@ -183,7 +183,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
       ConnectionStrings__NotificationDb: "Server=mssql-server,1433;Database=SaaS_Notification;User Id=sa;Password=p4ssw0rD;TrustServerCertificate=true;MultipleActiveResultSets=true"
-      Kafka__BootstrapServers: "kafka:9092"
+      Kafka__BootstrapServers: "kafka:29092"
 
 volumes:
   mssql-server:
