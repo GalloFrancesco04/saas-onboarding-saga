@@ -1,6 +1,8 @@
-# SAGA Pattern Exam – SaaS Microservices
+# SaaS Onboarding SAGA
 
-This project implements the SAGA pattern using 3 main microservices (Billing, Provisioning, Notification) for SaaS subscription management.
+University exam project: onboarding a customer to a SaaS product with an orchestrated SAGA across .NET microservices.
+
+When a subscription is created, the orchestrator runs three steps: Billing creates the subscription, Provisioning sets up the tenant, and Notification sends the welcome email. If a step fails, the steps already done are compensated: the tenant is deprovisioned and the subscription cancelled.
 
 ## Quick Start
 
