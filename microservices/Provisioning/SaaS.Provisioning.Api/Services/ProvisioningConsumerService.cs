@@ -18,7 +18,8 @@ public class ProvisioningConsumerService : BackgroundService
     // Topics to consume from
     private static readonly string[] ConsumerTopics = new[]
     {
-        "saas-provision-tenant"  // OrchestratorService: CreateTenant command
+        "saas-provision-tenant",   // OrchestratorService: CreateTenant command
+        "saas-deprovision-tenant"  // OrchestratorService: DeprovisionTenant compensation command
     };
 
     public ProvisioningConsumerService(
@@ -92,6 +93,10 @@ public class ProvisioningConsumerService : BackgroundService
                         await HandleProvisionTenantAsync(tenantService, messageValue);
                         break;
 
+                    case "saas-deprovision-tenant":
+                        await HandleDeprovisionTenantAsync(tenantService, messageValue);
+                        break;
+
                     default:
                         _logger.LogWarning("Unknown topic received: {Topic}", topic);
                         break;
@@ -135,6 +140,36 @@ public class ProvisioningConsumerService : BackgroundService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error handling ProvisionTenant command");
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Handle DeprovisionTenant compensation command: remove the tenant created by the SAGA
+    /// </summary>
+    private async Task HandleDeprovisionTenantAsync(ITenantService tenantService, string messageValue)
+    {
+        try
+        {
+            // Parse the command payload
+            using (JsonDocument doc = JsonDocument.Parse(messageValue))
+            {
+                var root = doc.RootElement;
+
+                var sagaId = Guid.Parse(root.GetProperty("SagaId").GetString()!);
+                var tenantId = Guid.Parse(root.GetProperty("TenantId").GetString()!);
+
+                _logger.LogInformation("Deprovisioning tenant {TenantId} for SAGA {SagaId}", tenantId, sagaId);
+
+                var deprovisioned = await tenantService.DeprovisionTenantAsync(tenantId);
+
+                _logger.LogInformation("Tenant {TenantId} deprovisioning for SAGA {SagaId}: {Result}",
+                    tenantId, sagaId, deprovisioned ? "done" : "not found");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error handling DeprovisionTenant command");
             throw;
         }
     }

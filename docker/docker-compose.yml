@@ -70,6 +70,8 @@ services:
       kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --partitions 1 --replication-factor 1 --topic saas-tenant-provisioning-failed
       kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --partitions 1 --replication-factor 1 --topic saas-send-welcome-email
       kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --partitions 1 --replication-factor 1 --topic saas-email-sent
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --partitions 1 --replication-factor 1 --topic saas-cancel-subscription
+      kafka-topics --create --if-not-exists --bootstrap-server kafka:29092 --partitions 1 --replication-factor 1 --topic saas-deprovision-tenant
       
       echo 'Topics created successfully!'
       kafka-topics --list --bootstrap-server kafka:29092

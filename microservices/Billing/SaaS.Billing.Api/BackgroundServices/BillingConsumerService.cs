@@ -18,7 +18,8 @@ public class BillingConsumerService : BackgroundService
     // Topics to consume from
     private static readonly string[] ConsumerTopics = new[]
     {
-        "saas-create-subscription"  // OrchestratorService: CreateSubscription command
+        "saas-create-subscription",  // OrchestratorService: CreateSubscription command
+        "saas-cancel-subscription"   // OrchestratorService: CancelSubscription compensation command
     };
 
     public BillingConsumerService(
@@ -92,6 +93,10 @@ public class BillingConsumerService : BackgroundService
                         await HandleCreateSubscriptionAsync(subscriptionService, messageValue);
                         break;
 
+                    case "saas-cancel-subscription":
+                        await HandleCancelSubscriptionAsync(subscriptionService, messageValue);
+                        break;
+
                     default:
                         _logger.LogWarning("Unknown topic received: {Topic}", topic);
                         break;
@@ -136,6 +141,37 @@ public class BillingConsumerService : BackgroundService
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error handling CreateSubscription command");
+            throw;
+        }
+    }
+
+    /// <summary>
+    /// Handle CancelSubscription compensation command: cancel the subscription created by the SAGA
+    /// </summary>
+    private async Task HandleCancelSubscriptionAsync(ISubscriptionService subscriptionService, string messageValue)
+    {
+        try
+        {
+            // Parse the command payload
+            using (JsonDocument doc = JsonDocument.Parse(messageValue))
+            {
+                var root = doc.RootElement;
+
+                var sagaId = Guid.Parse(root.GetProperty("SagaId").GetString()!);
+                var subscriptionId = Guid.Parse(root.GetProperty("SubscriptionId").GetString()!);
+
+                _logger.LogInformation("Cancelling subscription {SubscriptionId} for SAGA {SagaId}",
+                    subscriptionId, sagaId);
+
+                var cancelled = await subscriptionService.CancelSubscriptionAsync(subscriptionId);
+
+                _logger.LogInformation("Subscription {SubscriptionId} cancellation for SAGA {SagaId}: {Result}",
+                    subscriptionId, sagaId, cancelled ? "done" : "not found");
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error handling CancelSubscription command");
             throw;
         }
     }
