@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using Microsoft.Extensions.Logging;
 using SaaS.Billing.Shared.DTOs;
 
-namespace SaaS.Orchestrator.ClientHttp.Clients;
+namespace SaaS.Billing.ClientHttp.Clients;
 
 public class BillingClient(HttpClient httpClient, ILogger<BillingClient> logger) : IBillingClient
 {

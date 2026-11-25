@@ -1,6 +1,6 @@
 using SaaS.Billing.Shared.DTOs;
 
-namespace SaaS.Orchestrator.ClientHttp.Clients;
+namespace SaaS.Billing.ClientHttp.Clients;
 
 public interface IBillingClient
 {

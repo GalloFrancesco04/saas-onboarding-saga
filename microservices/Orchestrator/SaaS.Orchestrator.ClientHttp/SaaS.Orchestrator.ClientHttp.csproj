@@ -7,12 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Http" Version="9.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Billing\SaaS.Billing.Shared\SaaS.Billing.Shared.csproj" />
-    <ProjectReference Include="..\..\Provisioning\SaaS.Provisioning.Shared\SaaS.Provisioning.Shared.csproj" />
+    <ProjectReference Include="..\SaaS.Orchestrator.Shared\SaaS.Orchestrator.Shared.csproj" />
   </ItemGroup>
 
 </Project>

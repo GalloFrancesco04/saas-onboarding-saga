@@ -1,4 +1,4 @@
-namespace SaaS.Orchestrator.ClientHttp.Options;
+namespace SaaS.Billing.ClientHttp.Options;
 
 public class BillingClientOptions
 {

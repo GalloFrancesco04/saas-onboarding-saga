@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
-using SaaS.Orchestrator.ClientHttp.Clients;
-using SaaS.Orchestrator.ClientHttp.Options;
+using SaaS.Provisioning.ClientHttp.Clients;
+using SaaS.Provisioning.ClientHttp.Options;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SaaS.Orchestrator.ClientHttp\SaaS.Orchestrator.ClientHttp.csproj" />
+    <ProjectReference Include="..\..\Billing\SaaS.Billing.ClientHttp\SaaS.Billing.ClientHttp.csproj" />
+    <ProjectReference Include="..\..\Provisioning\SaaS.Provisioning.ClientHttp\SaaS.Provisioning.ClientHttp.csproj" />
     <ProjectReference Include="..\SaaS.Orchestrator.Repository\SaaS.Orchestrator.Repository.csproj" />
     <ProjectReference Include="..\SaaS.Orchestrator.Shared\SaaS.Orchestrator.Shared.csproj" />
   </ItemGroup>

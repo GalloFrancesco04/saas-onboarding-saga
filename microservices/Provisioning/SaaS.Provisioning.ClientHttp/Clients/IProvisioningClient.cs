@@ -1,6 +1,6 @@
 using SaaS.Provisioning.Shared.DTOs;
 
-namespace SaaS.Orchestrator.ClientHttp.Clients;
+namespace SaaS.Provisioning.ClientHttp.Clients;
 
 public interface IProvisioningClient
 {

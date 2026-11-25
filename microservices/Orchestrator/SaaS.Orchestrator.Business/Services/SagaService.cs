@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using SaaS.Orchestrator.ClientHttp.Clients;
+using SaaS.Billing.ClientHttp.Clients;
+using SaaS.Provisioning.ClientHttp.Clients;
 using SaaS.Orchestrator.Repository.Contexts;
 using SaaS.Orchestrator.Shared.Entities;
 using System.Text.Json;

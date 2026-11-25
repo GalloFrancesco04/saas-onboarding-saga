@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SaaS.Orchestrator.Api.Services;
 using SaaS.Orchestrator.Business.Services;
-using SaaS.Orchestrator.ClientHttp.Clients;
 using SaaS.Orchestrator.Repository.Contexts;
 using SaaS.Utility.Kafka.DependencyInjection;
 

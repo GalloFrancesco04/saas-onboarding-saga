@@ -1,4 +1,4 @@
-namespace SaaS.Orchestrator.ClientHttp.Options;
+namespace SaaS.Provisioning.ClientHttp.Options;
 
 public class ProvisioningClientOptions
 {

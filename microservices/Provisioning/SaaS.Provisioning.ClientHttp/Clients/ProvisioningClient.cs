@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using Microsoft.Extensions.Logging;
 using SaaS.Provisioning.Shared.DTOs;
 
-namespace SaaS.Orchestrator.ClientHttp.Clients;
+namespace SaaS.Provisioning.ClientHttp.Clients;
 
 public class ProvisioningClient(HttpClient httpClient, ILogger<ProvisioningClient> logger) : IProvisioningClient
 {
